@@ -1,0 +1,7 @@
+/home/ubuntu/MyWebApp/publish/MyWebApp
+/home/ubuntu/MyWebApp/publish/appsettings.Development.json
+/home/ubuntu/MyWebApp/publish/appsettings.json
+/home/ubuntu/MyWebApp/publish/MyWebApp.dll
+/home/ubuntu/MyWebApp/publish/MyWebApp.deps.json
+/home/ubuntu/MyWebApp/publish/MyWebApp.runtimeconfig.json
+/home/ubuntu/MyWebApp/publish/MyWebApp.pdb
