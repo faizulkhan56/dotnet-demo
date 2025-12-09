@@ -125,18 +125,19 @@ sudo systemctl restart nginx
 ### Dockerfile (using published files)
 
 ```dockerfile
-FROM mcr.microsoft.com/dotnet/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY ./publish ./
-EXPOSE 80
-CMD ["dotnet", "MyWebApp.dll"]
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "MyWebApp.dll"]
+
 ```
 
 Build and run:
 
 ```bash
 docker build -t helloworld-app .
-docker run -d -p 80:80 helloworld-app
+docker run -d -p 80:8080 helloworld-app
 ```
 
 ---
