@@ -145,27 +145,38 @@ docker run -d -p 80:8080 helloworld-app
 ## 🐳 Dockerize from Scratch (Multistage Build)
 
 ```dockerfile
+# -----------------------------
 # Stage 1: Build the app
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
-WORKDIR /app
-COPY MyWebApp.csproj ./
+# -----------------------------
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY MyWebApp.csproj .
 RUN dotnet restore
+
 COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
-# Stage 2: Run the app
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS runtime
+
+# -----------------------------
+# Stage 2: Runtime
+# -----------------------------
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
+
 COPY --from=build /app/publish .
-EXPOSE 80
-CMD ["dotnet", "MyWebApp.dll"]
+
+# Use ASP.NET default port (8080)
+EXPOSE 8080
+
+ENTRYPOINT ["dotnet", "MyWebApp.dll"]
+
 ```
 
 Then:
 
 ```bash
 docker build -t helloworld-app .
-docker run -d -p 80:80 helloworld-app
+docker run -d -p 80:8080 helloworld-app
 ```
 
 ---
